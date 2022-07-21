@@ -2,7 +2,7 @@
 # Otherwise include short commit hash.
 OFFICIAL_VERSION := $(shell if VER=`git describe --exact-match --tags 2>/dev/null`; then echo $$VER; else echo ""; fi)
 ifeq ($(OFFICIAL_VERSION),)
-VERSION := $(shell if VER=`git describe --tags | cut -d - -f -1`; then echo $$VER; else echo "0.0.0"; fi )+g$(shell git rev-parse --short HEAD)
+VERSION := 0.0.0+g$(shell git rev-parse --short HEAD)
 else
 VERSION := $(OFFICIAL_VERSION)
 endif
