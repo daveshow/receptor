@@ -43,7 +43,8 @@ jobs:
       - name: Tar the source file
         run: |
           make tarwheel
-        env: OFFICIAL_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+        env: 
+          OFFICIAL_VERSION: ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
