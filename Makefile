@@ -135,7 +135,7 @@ LATEST :=
 
 container: .container-flag-$(VERSION)
 
-tarwheel: .container-flag-$(VERSION)
+tarwheel: .tarwheel-flag-$(VERSION)
 
 .container-flag-$(VERSION): $(RECEPTORCTL_WHEEL) $(RECEPTOR_PYTHON_WORKER_WHEEL)
 	@tar --exclude-vcs-ignores -czf packaging/container/source.tar.gz .
