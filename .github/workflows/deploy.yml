@@ -54,7 +54,7 @@ jobs:
         run: |
           make tarwheel
         env: 
-          OFFICIAL_VERSION: ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+          OFFICIAL_VERSION: ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
@@ -66,4 +66,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+          build-args: VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
