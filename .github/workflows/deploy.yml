@@ -14,10 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Tar the source file
-        run: |
-          make tarwheel
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -43,6 +39,11 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+
+      - name: Tar the source file
+        run: |
+          make tarwheel
+        env: OFFICIAL_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
