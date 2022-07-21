@@ -51,7 +51,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=sha,prefix={{branch}}-
             type=raw,value=mytag-{{branch}}-{{sha}}
-            type=raw,pattern={{date 'YYYY.MM.DD'}}
+            type=raw,value={{date 'YYYY.MM.DD'}}
 
       - name: Tar the source file
         run: |
