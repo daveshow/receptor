@@ -16,8 +16,7 @@ jobs:
 
       - name: Tar the source file
         run: |
-          cd packaging/container
-          tar --exclude-vcs-ignores -czf source.tar.gz ../../
+          make tarwheel
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2

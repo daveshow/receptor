@@ -134,11 +134,20 @@ TAG := $(subst +,-,$(VERSION))
 LATEST :=
 
 container: .container-flag-$(VERSION)
+
+tarwheel: .container-flag-$(VERSION)
+
 .container-flag-$(VERSION): $(RECEPTORCTL_WHEEL) $(RECEPTOR_PYTHON_WORKER_WHEEL)
 	@tar --exclude-vcs-ignores -czf packaging/container/source.tar.gz .
 	@cp $(RECEPTORCTL_WHEEL) packaging/container
 	@cp $(RECEPTOR_PYTHON_WORKER_WHEEL) packaging/container
 	$(CONTAINERCMD) build packaging/container --build-arg VERSION=$(VERSION:v%=%) -t $(REPO):$(TAG) $(if $(LATEST),-t $(REPO):latest,)
+	@touch .container-flag-$(VERSION)
+
+.tarwheel-flag-$(VERSION): $(RECEPTORCTL_WHEEL) $(RECEPTOR_PYTHON_WORKER_WHEEL)
+	@tar --exclude-vcs-ignores -czf packaging/container/source.tar.gz .
+	@cp $(RECEPTORCTL_WHEEL) packaging/container
+	@cp $(RECEPTOR_PYTHON_WORKER_WHEEL) packaging/container
 	@touch .container-flag-$(VERSION)
 
 tc-image: container
