@@ -49,6 +49,9 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix={{branch}}-
+            type=raw,value=mytag-{{branch}}-{{sha}}
+            type=schedule,pattern={{date 'YYYY.MM.DD'}}
 
       - name: Tar the source file
         run: |
